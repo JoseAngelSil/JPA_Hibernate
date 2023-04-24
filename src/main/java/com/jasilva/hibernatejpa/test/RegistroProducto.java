@@ -21,8 +21,8 @@ public class RegistroProducto {
         /*
         creacion de un producto de la clase mapeada de la tabla productos en DB tienda
          */
-        Categoria cel = new Categoria("Ropa");
-        //Productos producto = new Productos("Celular huawei","Huawei psmart",9000.62, cel);
+        Categoria cel = new Categoria("Celulares");
+        Productos producto = new Productos("Celular huawei","Huawei psmart 2019",78.5, cel);
         // Creacion de las concenciones de persistence.xms
         EntityManager em = JPAUtils.getEntityManager();
         
@@ -31,7 +31,7 @@ public class RegistroProducto {
         
         em.getTransaction().begin();
         catDao.guardarCategoria(cel);
-        //prodDao.guardar(producto);
+        prodDao.guardar(producto);
         em.getTransaction().commit();
         em.close();
     }

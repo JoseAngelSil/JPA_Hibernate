@@ -4,10 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Jose Angel Silva
- */
 public class JPAUtils {
     private static final EntityManagerFactory factory =Persistence.createEntityManagerFactory("tienda");
     

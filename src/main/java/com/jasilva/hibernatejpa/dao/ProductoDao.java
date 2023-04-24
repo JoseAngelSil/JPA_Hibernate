@@ -21,11 +21,18 @@ public class ProductoDao {
     public void guardar(Productos producto) {
         this.em.persist(producto);
     }
+    public void actualizar(Productos producto) {
+        this.em.merge(producto);
+    }
+    public void remover(Productos producto){
+        producto = this.em.merge(producto);
+        this.em.remove(producto);
+    }
 
     public Productos consultaID(Integer id) {
         return em.find(Productos.class, id);
     }
-    
+
     public List<Productos> consultarTodos(){
         // JPQL 
         String jpql = "SELECT * from productos";
