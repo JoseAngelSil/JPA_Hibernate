@@ -5,12 +5,7 @@
 package com.jasilva.hibernatejpa.modelo;
 
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -18,6 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "productos")
+@NamedQuery(name = "Producto.consultaPrecio", query = "SELECT p.precio from Productos as p where p.nombre =:nombre")
 public class Productos {
 
     @Id

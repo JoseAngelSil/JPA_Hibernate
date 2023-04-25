@@ -19,6 +19,10 @@ public class Pedido {
     private Cliente cliente;
     @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
     private List<ItemPedido> productos = new ArrayList<>();
+
+    public Pedido() {
+    }
+
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -47,4 +51,6 @@ public class Pedido {
     public int getId() {
         return id;
     }
+
+
 }

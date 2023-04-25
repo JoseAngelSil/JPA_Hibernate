@@ -1,10 +1,9 @@
 package com.jasilva.hibernatejpa.dao;
 
 import com.jasilva.hibernatejpa.modelo.Pedido;
-import com.jasilva.hibernatejpa.modelo.Productos;
+import com.jasilva.hibernatejpa.vo.RelatorioVenta;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 public class PedidoDAO {
@@ -33,21 +32,28 @@ public class PedidoDAO {
 
     public List<Pedido> consultarTodos() {
         // JPQL
-        String jpql = "SELECT * from pedidos";
-        Query query = em.createNativeQuery(jpql, Productos.class);
-        return query.getResultList();
+        String jpql = "SELECT p from Pedido p";
+        return em.createQuery(jpql,Pedido.class).getResultList();
+    }
+    public Double valorTotalVendido(){
+        String jpql = "select sum(p.valor_total) from Pedido p ";
+        return em.createQuery(jpql, Double.class).getSingleResult();
+    }
+    public Double valorPromedioVendido(){
+        String jpql = "select avg(p.valor_promedio) from Pedido p";
+        return em.createQuery(jpql, Double.class).getSingleResult();
     }
 
-    public List<Pedido> consultaPorNombre(String nombre) {
-        String jpql = "SELECT * from pedido where nombre = '" + nombre + "'";
-        Query query = em.createNativeQuery(jpql, Productos.class);
-        return query.getResultList();
-    }
-
-    public List<Pedido> consultaPorCategoria(int idCategoria) {
-        String jpql = "SELECT * from pedidos where categoria_id = " + idCategoria;
-        Query query = em.createNativeQuery(jpql, Productos.class);
-        return query.getResultList();
+    public List<RelatorioVenta> rolatorioVentaVO(){
+        String jpql = "select new com.jasilva.hibernatejpa.vo.RelatorioVenta(producto.nombre, " +
+                "sum(item.cantidad), " +
+                "max(pedido.fechaRegistro)) " +
+                "from Pedido pedido " +
+                "join pedido.productos item " +
+                "Join item.producto producto " +
+                "group by producto.nombre " +
+                "order by item.cantidad DESC";
+        return em.createQuery(jpql,RelatorioVenta.class).getResultList();
     }
 }
 

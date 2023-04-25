@@ -28,15 +28,14 @@ public class ClienteDAO {
         this.em.remove(cliente);
     }
 
-    public Pedido consultaID(Integer id) {
-        return em.find(Pedido.class, id);
+    public Cliente consultaID(Integer id) {
+        return em.find(Cliente.class, id);
     }
 
     public List<Cliente> consultarTodos() {
         // JPQL
-        String jpql = "SELECT * from clientes";
-        Query query = em.createNativeQuery(jpql, Productos.class);
-        return query.getResultList();
+        String jpql = "SELECT p from Cliente p";
+        return em.createQuery(jpql,Cliente.class).getResultList();
     }
 
     public List<Pedido> consultaPorNombre(String nombre) {

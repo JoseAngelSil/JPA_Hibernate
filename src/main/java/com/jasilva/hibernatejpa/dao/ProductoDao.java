@@ -50,4 +50,8 @@ public class ProductoDao {
         Query query = em.createNativeQuery(jpql, Productos.class);
         return query.getResultList();
     }
+
+    public Double consultarPrecioProducto(String nombre){
+        return em.createNamedQuery("Producto.consultaPrecio", Double.class).setParameter("nombre", nombre).getSingleResult();
+    }
 }
