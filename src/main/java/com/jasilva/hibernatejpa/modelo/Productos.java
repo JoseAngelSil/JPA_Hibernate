@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "productos")
 @NamedQuery(name = "Producto.consultaPrecio", query = "SELECT p.precio from Productos as p where p.nombre =:nombre")
+@Inheritance(strategy = InheritanceType.JOINED) // herencia de tabla como una sola tabla
 public class Productos {
 
     @Id

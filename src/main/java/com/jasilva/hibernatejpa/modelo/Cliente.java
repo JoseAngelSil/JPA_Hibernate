@@ -1,10 +1,7 @@
 package com.jasilva.hibernatejpa.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -12,15 +9,16 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String nombre;
-    private String dni;
+    @Embedded // la clase esta siendo inyectada a esta clase cliente
+    private DatosPersonales datosPersonales;
 
     public Cliente() {
     }
 
     public Cliente(String nombre, String dni) {
-        this.nombre = nombre;
-        this.dni = dni;
+        this.datosPersonales = new DatosPersonales();
+        this.datosPersonales.setNombre(nombre);
+        this.datosPersonales.setDni(dni);
     }
 
     public int getId() {
@@ -28,18 +26,18 @@ public class Cliente {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.datosPersonales.getNombre();
     }
 
     public String getDni() {
-        return dni;
+        return this.datosPersonales.getDni();
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.datosPersonales.setNombre(nombre);
     }
 
     public void setDni(String dni) {
-        this.dni = dni;
+        this.datosPersonales.setDni(dni);
     }
 }
