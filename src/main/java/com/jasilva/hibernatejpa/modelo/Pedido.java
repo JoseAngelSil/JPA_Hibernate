@@ -15,7 +15,7 @@ public class Pedido {
     private int id;
     private  LocalDate fechaRegistro = LocalDate.now();
     private double valor_total = 0.0;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private Cliente cliente;
     @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
     private List<ItemPedido> productos = new ArrayList<>();

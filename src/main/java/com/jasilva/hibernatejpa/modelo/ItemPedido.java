@@ -12,9 +12,9 @@ public class ItemPedido {
     private int id;
     private short cantidad;
     private Double precio;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Productos producto;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pedido pedido;
 
     public ItemPedido() {

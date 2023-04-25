@@ -24,7 +24,7 @@ public class Productos {
     private double precio;
     private LocalDate fechaRegistro = LocalDate.now();
     //@Enumerated(EnumType.STRING) // el enum lo combierte en string y no el valor pocicional
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     public Productos() {

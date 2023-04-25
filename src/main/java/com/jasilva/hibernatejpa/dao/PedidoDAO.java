@@ -55,5 +55,10 @@ public class PedidoDAO {
                 "order by item.cantidad DESC";
         return em.createQuery(jpql,RelatorioVenta.class).getResultList();
     }
+
+    public Pedido consultarPedidoCliente(int id) { // consulta JOIN fetch
+        String jpql = "SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id=:id";
+        return em.createQuery(jpql,Pedido.class).setParameter("id",id).getSingleResult();
+    }
 }
 
